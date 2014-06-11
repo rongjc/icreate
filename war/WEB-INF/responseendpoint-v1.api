@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://sunlit-alloy-607.appspot.com/_ah/api",
-  "name" : "questionsetendpoint",
+  "name" : "responseendpoint",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -27,14 +27,14 @@
   "ownerName" : "nus.icreate",
   "packagePath" : "edu.sg",
   "methods" : {
-    "questionsetendpoint.insertQuestionSet" : {
-      "path" : "questionset",
+    "responseendpoint.insertResponse" : {
+      "path" : "response",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.insertQuestionSet",
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.insertResponse",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -43,30 +43,72 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "questionsetendpoint.updateQuestionSet" : {
-      "path" : "questionset",
-      "httpMethod" : "PUT",
+    "responseendpoint.removeResponse" : {
+      "path" : "response/{id}",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.updateQuestionSet",
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.removeResponse",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
-        "body" : "autoTemplate(backendResponse)"
+        "body" : "empty"
       }
     },
-    "questionsetendpoint.listQuestionSet" : {
-      "path" : "questionset",
+    "responseendpoint.getResponse" : {
+      "path" : "response/{id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.listQuestionSet",
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.getResponse",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "responseendpoint.updateResponse" : {
+      "path" : "response",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.updateResponse",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "responseendpoint.listResponse" : {
+      "path" : "response",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.listResponse",
       "request" : {
         "parameters" : {
           "cursor" : {
@@ -83,66 +125,21 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "questionsetendpoint.removeQuestionSet" : {
-      "path" : "questionset/{id}",
-      "httpMethod" : "DELETE",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.removeQuestionSet",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "empty"
-      }
-    },
-    "questionsetendpoint.getQuestionSet" : {
-      "path" : "questionset/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.getQuestionSet",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "QuestionSet" : {
-        "id" : "QuestionSet",
+      "Response" : {
+        "id" : "Response",
         "type" : "object",
         "properties" : {
-          "qsid" : {
+          "rid" : {
             "$ref" : "Key"
           },
-          "qList" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Question"
-            }
+          "response" : {
+            "type" : "string"
           },
-          "name" : {
+          "who" : {
             "type" : "string"
           }
         }
@@ -175,38 +172,14 @@
           }
         }
       },
-      "Question" : {
-        "id" : "Question",
-        "type" : "object",
-        "properties" : {
-          "qid" : {
-            "$ref" : "Key"
-          },
-          "answerIndex" : {
-            "type" : "integer"
-          },
-          "anonymous" : {
-            "type" : "boolean"
-          },
-          "a" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "q" : {
-            "type" : "string"
-          }
-        }
-      },
-      "CollectionResponse_QuestionSet" : {
-        "id" : "CollectionResponse_QuestionSet",
+      "CollectionResponse_Response" : {
+        "id" : "CollectionResponse_Response",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "QuestionSet"
+              "$ref" : "Response"
             }
           },
           "nextPageToken" : {
@@ -216,32 +189,32 @@
       }
     },
     "methods" : {
-      "icreate.nus.edu.sg.QuestionSetEndpoint.insertQuestionSet" : {
+      "icreate.nus.edu.sg.ResponseEndpoint.insertResponse" : {
         "request" : {
-          "$ref" : "QuestionSet"
+          "$ref" : "Response"
         },
         "response" : {
-          "$ref" : "QuestionSet"
+          "$ref" : "Response"
         }
       },
-      "icreate.nus.edu.sg.QuestionSetEndpoint.updateQuestionSet" : {
+      "icreate.nus.edu.sg.ResponseEndpoint.removeResponse" : {
+      },
+      "icreate.nus.edu.sg.ResponseEndpoint.getResponse" : {
+        "response" : {
+          "$ref" : "Response"
+        }
+      },
+      "icreate.nus.edu.sg.ResponseEndpoint.updateResponse" : {
         "request" : {
-          "$ref" : "QuestionSet"
+          "$ref" : "Response"
         },
         "response" : {
-          "$ref" : "QuestionSet"
+          "$ref" : "Response"
         }
       },
-      "icreate.nus.edu.sg.QuestionSetEndpoint.listQuestionSet" : {
+      "icreate.nus.edu.sg.ResponseEndpoint.listResponse" : {
         "response" : {
-          "$ref" : "CollectionResponse_QuestionSet"
-        }
-      },
-      "icreate.nus.edu.sg.QuestionSetEndpoint.removeQuestionSet" : {
-      },
-      "icreate.nus.edu.sg.QuestionSetEndpoint.getQuestionSet" : {
-        "response" : {
-          "$ref" : "QuestionSet"
+          "$ref" : "CollectionResponse_Response"
         }
       }
     }
