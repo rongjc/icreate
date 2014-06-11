@@ -14,17 +14,19 @@ import com.google.appengine.api.datastore.Key;
 public class QuestionSet {
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key uid;
+	private Key qsid;
 	
 	@Persistent(mappedBy="qs")
 	private List<Question> qList;
 	
-	
-	public Key getUid() {
-		return uid;
+	@Persistent
+	private User user;
+
+	public Key getQsid() {
+		return qsid;
 	}
-	public void setUid(Key uid) {
-		this.uid = uid;
+	public void setQsid(Key qsid) {
+		this.qsid = qsid;
 	}
 	public List<Question> getqList() {
 		return qList;

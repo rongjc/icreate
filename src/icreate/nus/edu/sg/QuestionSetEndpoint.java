@@ -8,6 +8,7 @@ import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
+import com.google.appengine.api.datastore.Key;
 
 import java.util.HashMap;
 import java.util.List;
@@ -100,7 +101,7 @@ public class QuestionSetEndpoint {
 	public QuestionSet insertQuestionSet(QuestionSet questionset) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (questionset.getUid() != null && containsQuestionSet(questionset)) {
+			if (questionset.getQsid()!=null && containsQuestionSet(questionset)) {
 				throw new EntityExistsException("Object already exists");
 			}
 			mgr.makePersistent(questionset);
@@ -148,12 +149,32 @@ public class QuestionSetEndpoint {
 			mgr.close();
 		}
 	}
+	/*
+	@ApiMethod(name = "addQuestionById")
+	public void addQuestionById(@Named("qid") Long qid, @Named("qsid") Long qsid) {
+		PersistenceManager mgr = getPersistenceManager();
+		try {
+			QuestionSet questionset = mgr.getObjectById(QuestionSet.class, qsid);
+			Question question = mgr.getObjectById(Question.class, qid);
+			//if (questionset.getqList().contains(question) == false){
+			List<Question> q = questionset.getqList();
+			q.add(question);
+			questionset.setqList(q);
+			//}
+			mgr.makePersistent(questionset);
+		} finally {
+			mgr.close();
+		}
+	}*/
 
 	private boolean containsQuestionSet(QuestionSet questionset) {
 		PersistenceManager mgr = getPersistenceManager();
 		boolean contains = true;
 		try {
-			mgr.getObjectById(QuestionSet.class, questionset.getUid());
+			if(questionset.getQsid() != null)
+				mgr.getObjectById(QuestionSet.class, questionset.getQsid());
+			else
+				contains = false;
 		} catch (javax.jdo.JDOObjectNotFoundException ex) {
 			contains = false;
 		} finally {

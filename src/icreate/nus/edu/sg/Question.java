@@ -17,7 +17,7 @@ public class Question {
 
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Key id;
+	private Key qid;
 	
 	@Persistent
 	private String Q;
@@ -28,22 +28,41 @@ public class Question {
 	@Persistent
 	private QuestionSet qs;
 	
-	/*
-	public QuestionSet getQs() {
-		return qs;
+	@Persistent
+	private int answerIndex; 
+	
+	@Persistent(mappedBy="q")
+	private List<Response> responses;
+	
+	@Persistent
+	private boolean isAnonymous;
+	
+	public int getAnswerIndex() {
+		return answerIndex;
 	}
 
-	public void setQs(QuestionSet qs) {
-		this.qs = qs;
+	public void setAnswerIndex(int answerIndex) {
+		this.answerIndex = answerIndex;
 	}
-	 */
-	public Key getId() {
-		return id;
-	}
+
 	
-	public void setId(Key id) {
-		this.id = id;
+	public boolean isAnonymous() {
+		return isAnonymous;
 	}
+
+	public void setAnonymous(boolean isAnonymous) {
+		this.isAnonymous = isAnonymous;
+	}
+
+
+	public Key getQid() {
+		return qid;
+	}
+
+	public void setQid(Key qid) {
+		this.qid = qid;
+	}
+
 	public String getQ() {
 		return Q;
 	}
@@ -55,6 +74,14 @@ public class Question {
 	}
 	public void setA(List<String> a) {
 		A = a;
+	}
+	
+	public void copyQuestion(Question qn){
+		this.A = qn.getA();
+		this.Q = qn.getQ();
+		this.answerIndex = qn.getAnswerIndex();
+		this.isAnonymous = qn.isAnonymous();
+	
 	}
 
 }

@@ -100,7 +100,7 @@ public class QuestionEndpoint {
 	public Question insertQuestion(Question question) {
 		PersistenceManager mgr = getPersistenceManager();
 		try {
-			if (question.getId() != null && containsQuestion(question)) {
+			if (question.getQid() != null && containsQuestion(question)) {
 				throw new EntityExistsException("Object already exists");
 			}
 			mgr.makePersistent(question);
@@ -121,15 +121,21 @@ public class QuestionEndpoint {
 	@ApiMethod(name = "updateQuestion")
 	public Question updateQuestion(Question question) {
 		PersistenceManager mgr = getPersistenceManager();
+		Question q;
 		try {
 			if (!containsQuestion(question)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.makePersistent(question);
+			else{
+				q = mgr.getObjectById(Question.class, question.getQid().getId());
+				q.copyQuestion(question);
+				//q.setA(question.getA());
+				//mgr.makePersistent(q);
+			}
 		} finally {
 			mgr.close();
 		}
-		return question;
+		return q;
 	}
 
 	/**
@@ -153,7 +159,8 @@ public class QuestionEndpoint {
 		PersistenceManager mgr = getPersistenceManager();
 		boolean contains = true;
 		try {
-			mgr.getObjectById(Question.class, question.getId());
+			mgr.getObjectById(Question.class, question.getQid().getId());
+
 		} catch (javax.jdo.JDOObjectNotFoundException ex) {
 			contains = false;
 		} finally {
