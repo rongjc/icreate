@@ -12,7 +12,9 @@
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
-
+  <static-files>
+  	<include path="/frontEnd/**" />
+  </static-files>
   <!--
     HTTP Sessions are disabled by default. To enable HTTP sessions specify:
 

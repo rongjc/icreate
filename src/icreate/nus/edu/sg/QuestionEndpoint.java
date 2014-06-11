@@ -127,10 +127,9 @@ public class QuestionEndpoint {
 				throw new EntityNotFoundException("Object does not exist");
 			}
 			else{
+				//persistent will be made upon persistent close
 				q = mgr.getObjectById(Question.class, question.getQid().getId());
-				q.copyQuestion(question);
-				//q.setA(question.getA());
-				//mgr.makePersistent(q);
+				q.copyQuestion(question);				
 			}
 		} finally {
 			mgr.close();

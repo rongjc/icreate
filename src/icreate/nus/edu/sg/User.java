@@ -19,6 +19,8 @@ public class User {
 	@Persistent
 	private String nusId;
 	
+
+
 	@Persistent(mappedBy="user")
 	List<QuestionSet> qs;
 
@@ -30,6 +32,14 @@ public class User {
 		this.uid = uid;
 	}
 
+	public List<QuestionSet> getQs() {
+		return qs;
+	}
+
+	public void setQs(List<QuestionSet> qs) {
+		this.qs = qs;
+	}
+	
 	public String getNusId() {
 		return nusId;
 	}
@@ -38,5 +48,8 @@ public class User {
 		this.nusId = nusId;
 	}
 	
-	
+	public void copyUser(User u){
+		this.nusId = u.getNusId();
+		this.qs = u.getQs();
+	}
 }

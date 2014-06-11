@@ -42,6 +42,7 @@ public class QuestionSetEndpoint {
 
 		try {
 			mgr = getPersistenceManager();
+			mgr.getFetchPlan().setMaxFetchDepth(2);
 			Query query = mgr.newQuery(QuestionSet.class);
 			if (cursorString != null && cursorString != "") {
 				cursor = Cursor.fromWebSafeString(cursorString);
@@ -61,8 +62,11 @@ public class QuestionSetEndpoint {
 
 			// Tight loop for fetching all entities from datastore and accomodate
 			// for lazy fetch.
-			for (QuestionSet obj : execute)
-				;
+			for (QuestionSet obj : execute){
+				//obj.getqList();
+				
+			}
+				
 		} finally {
 			mgr.close();
 		}
@@ -83,6 +87,8 @@ public class QuestionSetEndpoint {
 		QuestionSet questionset = null;
 		try {
 			questionset = mgr.getObjectById(QuestionSet.class, id);
+			
+			try{questionset.getqList();}catch(Exception e){}
 		} finally {
 			mgr.close();
 		}
@@ -122,15 +128,19 @@ public class QuestionSetEndpoint {
 	@ApiMethod(name = "updateQuestionSet")
 	public QuestionSet updateQuestionSet(QuestionSet questionset) {
 		PersistenceManager mgr = getPersistenceManager();
+		QuestionSet qs;
 		try {
 			if (!containsQuestionSet(questionset)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
-			mgr.makePersistent(questionset);
+			
+			
+			qs = mgr.getObjectById(QuestionSet.class, questionset.getQsid().getId());
+			qs.copyQS(questionset);
 		} finally {
 			mgr.close();
 		}
-		return questionset;
+		return qs;
 	}
 
 	/**
@@ -149,6 +159,8 @@ public class QuestionSetEndpoint {
 			mgr.close();
 		}
 	}
+	
+
 	/*
 	@ApiMethod(name = "addQuestionById")
 	public void addQuestionById(@Named("qid") Long qid, @Named("qsid") Long qsid) {
@@ -171,10 +183,8 @@ public class QuestionSetEndpoint {
 		PersistenceManager mgr = getPersistenceManager();
 		boolean contains = true;
 		try {
-			if(questionset.getQsid() != null)
-				mgr.getObjectById(QuestionSet.class, questionset.getQsid());
-			else
-				contains = false;
+
+			mgr.getObjectById(QuestionSet.class, questionset.getQsid().getId());
 		} catch (javax.jdo.JDOObjectNotFoundException ex) {
 			contains = false;
 		} finally {

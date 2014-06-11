@@ -21,6 +21,9 @@ public class QuestionSet {
 	
 	@Persistent
 	private User user;
+	
+	@Persistent
+	private String name;
 
 	public Key getQsid() {
 		return qsid;
@@ -28,11 +31,21 @@ public class QuestionSet {
 	public void setQsid(Key qsid) {
 		this.qsid = qsid;
 	}
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public List<Question> getqList() {
 		return qList;
 	}
 	public void setqList(List<Question> qList) {
 		this.qList = qList;
 	}
-	
+	public void copyQS(QuestionSet qs){
+		this.qList = qs.getqList();
+	}
 }
