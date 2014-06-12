@@ -52,22 +52,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "questionendpoint.updateQuestion" : {
-      "path" : "question",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionEndpoint.updateQuestion",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "questionendpoint.removeQuestion" : {
       "path" : "question/{id}",
       "httpMethod" : "DELETE",
@@ -87,6 +71,22 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "questionendpoint.updateQuestion" : {
+      "path" : "question",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.QuestionEndpoint.updateQuestion",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     },
     "questionendpoint.getQuestion" : {
@@ -154,6 +154,9 @@
           "answerIndex" : {
             "type" : "integer"
           },
+          "q" : {
+            "type" : "string"
+          },
           "anonymous" : {
             "type" : "boolean"
           },
@@ -162,9 +165,6 @@
             "items" : {
               "type" : "string"
             }
-          },
-          "q" : {
-            "type" : "string"
           }
         }
       },
@@ -203,6 +203,8 @@
           "$ref" : "CollectionResponse_Question"
         }
       },
+      "icreate.nus.edu.sg.QuestionEndpoint.removeQuestion" : {
+      },
       "icreate.nus.edu.sg.QuestionEndpoint.updateQuestion" : {
         "request" : {
           "$ref" : "Question"
@@ -210,8 +212,6 @@
         "response" : {
           "$ref" : "Question"
         }
-      },
-      "icreate.nus.edu.sg.QuestionEndpoint.removeQuestion" : {
       },
       "icreate.nus.edu.sg.QuestionEndpoint.getQuestion" : {
         "response" : {

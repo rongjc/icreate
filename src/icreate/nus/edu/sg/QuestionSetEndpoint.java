@@ -7,6 +7,7 @@ import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
 import com.google.appengine.api.datastore.Cursor;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 import com.google.appengine.api.datastore.Key;
 
@@ -82,13 +83,22 @@ public class QuestionSetEndpoint {
 	 * @return The entity with primary key id.
 	 */
 	@ApiMethod(name = "getQuestionSet")
-	public QuestionSet getQuestionSet(@Named("id") Long id) {
+	public QuestionSet getQuestionSet(@Named("id") String id) {
 		PersistenceManager mgr = getPersistenceManager();
+		Key key = KeyFactory.stringToKey(id);
 		QuestionSet questionset = null;
 		try {
-			questionset = mgr.getObjectById(QuestionSet.class, id);
+			questionset = mgr.getObjectById(QuestionSet.class, key);
 			
-			try{questionset.getqList();}catch(Exception e){}
+			try{
+				List<Question> qList = questionset.getqList();
+				if(qList != null){
+					for(Question q : qList){
+						q.getQ();
+						q.getA();
+					}
+				}
+			}catch(Exception e){}
 		} finally {
 			mgr.close();
 		}
@@ -130,13 +140,28 @@ public class QuestionSetEndpoint {
 		PersistenceManager mgr = getPersistenceManager();
 		QuestionSet qs;
 		try {
+			/*
 			if (!containsQuestionSet(questionset)) {
 				throw new EntityNotFoundException("Object does not exist");
 			}
+			*/
+			String s = questionset.getKeyString();
 			
+			Key key = KeyFactory.stringToKey(s);
 			
-			qs = mgr.getObjectById(QuestionSet.class, questionset.getQsid().getId());
+			qs = mgr.getObjectById(QuestionSet.class, key);
+			qs.getqList();
+			Question t = new Question();
+			t.setQ("ADASDA");
+			List<Question> m = questionset.getqList();
+			for (Question obj : m){
+				//obj.getqList();
+				obj.getQ();
+				obj.getA();
+				
+			}
 			qs.copyQS(questionset);
+			//mgr.makePersistent(qs);
 		} finally {
 			mgr.close();
 		}
@@ -159,7 +184,7 @@ public class QuestionSetEndpoint {
 			mgr.close();
 		}
 	}
-	
+
 
 	/*
 	@ApiMethod(name = "addQuestionById")
@@ -183,8 +208,8 @@ public class QuestionSetEndpoint {
 		PersistenceManager mgr = getPersistenceManager();
 		boolean contains = true;
 		try {
-
-			mgr.getObjectById(QuestionSet.class, questionset.getQsid().getId());
+			Key key = KeyFactory.stringToKey(questionset.getKeyString());
+			mgr.getObjectById(QuestionSet.class, key);
 		} catch (javax.jdo.JDOObjectNotFoundException ex) {
 			contains = false;
 		} finally {

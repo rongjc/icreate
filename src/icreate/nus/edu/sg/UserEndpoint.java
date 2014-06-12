@@ -83,7 +83,10 @@ public class UserEndpoint {
 		try {
 			user = mgr.getObjectById(User.class, id);
 			try{
-				user.getQs();
+				List<QuestionSet> qs = user.getQs();
+				for(QuestionSet t:qs){
+					t.getName();
+				}
 			}
 			catch (Exception e){
 				

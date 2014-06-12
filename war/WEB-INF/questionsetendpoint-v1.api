@@ -27,22 +27,6 @@
   "ownerName" : "nus.icreate",
   "packagePath" : "edu.sg",
   "methods" : {
-    "questionsetendpoint.insertQuestionSet" : {
-      "path" : "questionset",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.insertQuestionSet",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "questionsetendpoint.updateQuestionSet" : {
       "path" : "questionset",
       "httpMethod" : "PUT",
@@ -51,6 +35,22 @@
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.updateQuestionSet",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "questionsetendpoint.insertQuestionSet" : {
+      "path" : "questionset",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.QuestionSetEndpoint.insertQuestionSet",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -116,7 +116,7 @@
       "request" : {
         "parameters" : {
           "id" : {
-            "type" : "int64",
+            "type" : "string",
             "required" : true
           }
         },
@@ -143,6 +143,9 @@
             }
           },
           "name" : {
+            "type" : "string"
+          },
+          "keyString" : {
             "type" : "string"
           }
         }
@@ -185,6 +188,9 @@
           "answerIndex" : {
             "type" : "integer"
           },
+          "q" : {
+            "type" : "string"
+          },
           "anonymous" : {
             "type" : "boolean"
           },
@@ -193,9 +199,6 @@
             "items" : {
               "type" : "string"
             }
-          },
-          "q" : {
-            "type" : "string"
           }
         }
       },
@@ -216,7 +219,7 @@
       }
     },
     "methods" : {
-      "icreate.nus.edu.sg.QuestionSetEndpoint.insertQuestionSet" : {
+      "icreate.nus.edu.sg.QuestionSetEndpoint.updateQuestionSet" : {
         "request" : {
           "$ref" : "QuestionSet"
         },
@@ -224,7 +227,7 @@
           "$ref" : "QuestionSet"
         }
       },
-      "icreate.nus.edu.sg.QuestionSetEndpoint.updateQuestionSet" : {
+      "icreate.nus.edu.sg.QuestionSetEndpoint.insertQuestionSet" : {
         "request" : {
           "$ref" : "QuestionSet"
         },
