@@ -8,6 +8,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 
@@ -19,7 +20,16 @@ public class User {
 	@Persistent
 	private String nusId;
 	
+	@Persistent
+	private String keyString;
 
+	public String getKeyString() {
+		return KeyFactory.keyToString(this.uid);
+	}
+
+	public void setKeyString(String keyString) {
+		this.keyString = keyString;
+	}
 
 	@Persistent(mappedBy="user")
 	List<QuestionSet> qs;

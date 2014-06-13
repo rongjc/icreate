@@ -27,6 +27,7 @@
   "ownerName" : "nus.icreate",
   "packagePath" : "edu.sg",
   "methods" : {
+<<<<<<< HEAD
     "userendpoint.updateUser" : {
       "path" : "user",
       "httpMethod" : "PUT",
@@ -258,6 +259,245 @@
         }
       },
       "icreate.nus.edu.sg.UserEndpoint.getUser" : {
+=======
+    "userendpoint.listUser" : {
+      "path" : "user",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.listUser",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.getUser" : {
+      "path" : "user/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.getUser",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.insertUser" : {
+      "path" : "user",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.insertUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.removeUser" : {
+      "path" : "user/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.removeUser",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "userendpoint.updateUser" : {
+      "path" : "user",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.updateUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "CollectionResponse_User" : {
+        "id" : "CollectionResponse_User",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "User"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "uid" : {
+            "$ref" : "Key"
+          },
+          "nusId" : {
+            "type" : "string"
+          },
+          "keyString" : {
+            "type" : "string"
+          },
+          "qs" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "QuestionSet"
+            }
+          }
+        }
+      },
+      "Key" : {
+        "id" : "Key",
+        "type" : "object",
+        "properties" : {
+          "kind" : {
+            "type" : "string"
+          },
+          "appId" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "parent" : {
+            "$ref" : "Key"
+          },
+          "complete" : {
+            "type" : "boolean"
+          },
+          "namespace" : {
+            "type" : "string"
+          }
+        }
+      },
+      "QuestionSet" : {
+        "id" : "QuestionSet",
+        "type" : "object",
+        "properties" : {
+          "qsid" : {
+            "$ref" : "Key"
+          },
+          "qList" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Question"
+            }
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "keyString" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Question" : {
+        "id" : "Question",
+        "type" : "object",
+        "properties" : {
+          "qid" : {
+            "$ref" : "Key"
+          },
+          "answerIndex" : {
+            "type" : "integer"
+          },
+          "q" : {
+            "type" : "string"
+          },
+          "anonymous" : {
+            "type" : "boolean"
+          },
+          "a" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "icreate.nus.edu.sg.UserEndpoint.listUser" : {
+        "response" : {
+          "$ref" : "CollectionResponse_User"
+        }
+      },
+      "icreate.nus.edu.sg.UserEndpoint.getUser" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "icreate.nus.edu.sg.UserEndpoint.insertUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "icreate.nus.edu.sg.UserEndpoint.removeUser" : {
+      },
+      "icreate.nus.edu.sg.UserEndpoint.updateUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+>>>>>>> refs/remotes/origin/master
         "response" : {
           "$ref" : "User"
         }
