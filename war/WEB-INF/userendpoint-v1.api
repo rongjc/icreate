@@ -89,6 +89,22 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "userendpoint.updateUser" : {
+      "path" : "user",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.updateUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "userendpoint.removeUser" : {
       "path" : "user/{id}",
       "httpMethod" : "DELETE",
@@ -108,22 +124,6 @@
       },
       "response" : {
         "body" : "empty"
-      }
-    },
-    "userendpoint.updateUser" : {
-      "path" : "user",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.updateUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -258,8 +258,6 @@
           "$ref" : "User"
         }
       },
-      "icreate.nus.edu.sg.UserEndpoint.removeUser" : {
-      },
       "icreate.nus.edu.sg.UserEndpoint.updateUser" : {
         "request" : {
           "$ref" : "User"
@@ -267,6 +265,8 @@
         "response" : {
           "$ref" : "User"
         }
+      },
+      "icreate.nus.edu.sg.UserEndpoint.removeUser" : {
       }
     }
   }

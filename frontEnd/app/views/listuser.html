@@ -1,8 +1,0 @@
-<p>Wait for a while until the list is loaded. Then click Get User</p>
-<button ng-click="listUser()">Get User</button><br>
-<ul>
-  <li ng-repeat="u in users">
-  <a href="#/listQS/{{u.uid.id}}">nusID: {{u.nusId}}</a><button ng-click="removeQS(u.uid.id)">remove</button>
-
-</ul>
-NUSID: <input ng-model="nusId"></input><button ng-click="addUser()">add</button>

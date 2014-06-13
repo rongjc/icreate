@@ -54,15 +54,9 @@
     <script type="text/javascript">
       //var root = 'http://localhost:8888/_ah/api';
       var root = 'https://1-dot-sunlit-alloy-607.appspot.com/_ah/api';
-      function init() {
-      //Parameters are APIName,APIVersion,CallBack function,API Root 
-        gapi.client.load('questionendpoint', 'v1', null, root);
-        gapi.client.load('questionsetendpoint', 'v1', null, root);
-        gapi.client.load('responseendpoint', 'v1', null, root);
-        gapi.client.load('userendpoint', 'v1', null, root);
-      }
+
     </script>
-    <script src="https://apis.google.com/js/client.js?onload=init"></script>    
+ 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
@@ -90,5 +84,17 @@
         <script src="scripts/controllers/listqs.js"></script>
         <script src="scripts/controllers/listuser.js"></script>
         <!-- endbuild -->
+
+ <script type="text/javascript">
+       function loadLib() {
+      //Parameters are APIName,APIVersion,CallBack function,API Root 
+       gapi.client.load('questionendpoint', 'v1', null, root);
+       gapi.client.load('questionsetendpoint', 'v1', null, root);
+        gapi.client.load('responseendpoint', 'v1', null, root);
+        gapi.client.load('userendpoint', 'v1', null, root);
+        
+      }</script>
+<script src="https://apis.google.com/js/client.js?onload=loadLib"></script>
+
 </body>
 </html>

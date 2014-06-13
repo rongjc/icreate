@@ -8,13 +8,27 @@
  * Controller of the icreateApp
  */
 angular.module('icreateApp')
-  .controller('ListuserCtrl', function ($scope) {
+  .controller('ListuserCtrl', function ($scope, $window) {
     $scope.users = [];
     $scope.nusId = "";
+    $scope.isReady = false;
+    $scope.isUserReady = false;
+    $window.init = function(){
+    	$scope.$apply($scope.init);
+    }
+    $scope.init = function(){
+    	gapi.client.load('userendpoint', 'v1', $scope.finishLoading, root);
+    }
+
+    $scope.finishLoading = function(){
+		$scope.isReady = true;
+		$scope.listUser();
+    }
 
     $scope.listUser = function(){
 		gapi.client.userendpoint.listUser().execute(function(resp) {
 			$scope.users = resp.items;
+			$scope.isUserReady = true;
 			$scope.$apply();
 			console.log(resp);
 		});
@@ -42,4 +56,5 @@ angular.module('icreateApp')
 			console.log(resp);
 		});
     }   
+
   });

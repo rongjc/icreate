@@ -1,0 +1,20 @@
+<div ng-show='!isReady'><img src="./images/loading.gif">Loading</div>
+<div>wait for a while and click this button to load the users</div>
+<button ng-click='listUser()'>Load users</button>
+<table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>nusID</th>
+        <th>Operation</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<tr  ng-repeat="u in users">
+	        <td>{{$index}}</td>
+    		<td><a href="#/listQS/{{u.uid.id}}">{{u.nusId}}</a></td>
+        	<td><button  ng-click="removeQS(u.uid.id)" >remove</button></th>
+    	</tr>
+    </tbody>
+</table>
+NUSID: <input ng-model="nusId"></input><button ng-click="addUser()">add</button>
