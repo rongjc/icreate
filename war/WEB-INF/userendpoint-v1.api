@@ -27,68 +27,6 @@
   "ownerName" : "nus.icreate",
   "packagePath" : "edu.sg",
   "methods" : {
-    "userendpoint.listUser" : {
-      "path" : "user",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.listUser",
-      "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "limit" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.getUser" : {
-      "path" : "user/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.getUser",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "userendpoint.insertUser" : {
-      "path" : "user",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.insertUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "userendpoint.updateUser" : {
       "path" : "user",
       "httpMethod" : "PUT",
@@ -125,25 +63,72 @@
       "response" : {
         "body" : "empty"
       }
+    },
+    "userendpoint.listUser" : {
+      "path" : "user",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.listUser",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.insertUser" : {
+      "path" : "user",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.insertUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "userendpoint.getUser" : {
+      "path" : "user/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "icreate.nus.edu.sg.UserEndpoint.getUser",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_User" : {
-        "id" : "CollectionResponse_User",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "User"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "User" : {
         "id" : "User",
         "type" : "object",
@@ -182,11 +167,11 @@
           "parent" : {
             "$ref" : "Key"
           },
-          "complete" : {
-            "type" : "boolean"
-          },
           "namespace" : {
             "type" : "string"
+          },
+          "complete" : {
+            "type" : "boolean"
           }
         }
       },
@@ -218,8 +203,8 @@
           "answerIndex" : {
             "type" : "integer"
           },
-          "anonymous" : {
-            "type" : "boolean"
+          "q" : {
+            "type" : "string"
           },
           "a" : {
             "type" : "array",
@@ -227,21 +212,41 @@
               "type" : "string"
             }
           },
-          "q" : {
+          "anonymous" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "CollectionResponse_User" : {
+        "id" : "CollectionResponse_User",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "User"
+            }
+          },
+          "nextPageToken" : {
             "type" : "string"
           }
         }
       }
     },
     "methods" : {
+      "icreate.nus.edu.sg.UserEndpoint.updateUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "icreate.nus.edu.sg.UserEndpoint.removeUser" : {
+      },
       "icreate.nus.edu.sg.UserEndpoint.listUser" : {
         "response" : {
           "$ref" : "CollectionResponse_User"
-        }
-      },
-      "icreate.nus.edu.sg.UserEndpoint.getUser" : {
-        "response" : {
-          "$ref" : "User"
         }
       },
       "icreate.nus.edu.sg.UserEndpoint.insertUser" : {
@@ -252,15 +257,10 @@
           "$ref" : "User"
         }
       },
-      "icreate.nus.edu.sg.UserEndpoint.updateUser" : {
-        "request" : {
-          "$ref" : "User"
-        },
+      "icreate.nus.edu.sg.UserEndpoint.getUser" : {
         "response" : {
           "$ref" : "User"
         }
-      },
-      "icreate.nus.edu.sg.UserEndpoint.removeUser" : {
       }
     }
   }

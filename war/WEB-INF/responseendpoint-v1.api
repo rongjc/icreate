@@ -27,17 +27,22 @@
   "ownerName" : "nus.icreate",
   "packagePath" : "edu.sg",
   "methods" : {
-    "responseendpoint.insertResponse" : {
-      "path" : "response",
-      "httpMethod" : "POST",
+    "responseendpoint.getResponse" : {
+      "path" : "response/{id}",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.insertResponse",
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.getResponse",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -64,19 +69,23 @@
         "body" : "empty"
       }
     },
-    "responseendpoint.getResponse" : {
-      "path" : "response/{id}",
+    "responseendpoint.listResponse" : {
+      "path" : "response",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.getResponse",
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.listResponse",
       "request" : {
         "parameters" : {
-          "id" : {
-            "type" : "int64",
-            "required" : true
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -101,26 +110,17 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "responseendpoint.listResponse" : {
+    "responseendpoint.insertResponse" : {
       "path" : "response",
-      "httpMethod" : "GET",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.listResponse",
+      "rosyMethod" : "icreate.nus.edu.sg.ResponseEndpoint.insertResponse",
       "request" : {
-        "parameters" : {
-          "cursor" : {
-            "type" : "string",
-            "required" : false
-          },
-          "limit" : {
-            "type" : "int32",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -164,11 +164,11 @@
           "parent" : {
             "$ref" : "Key"
           },
-          "complete" : {
-            "type" : "boolean"
-          },
           "namespace" : {
             "type" : "string"
+          },
+          "complete" : {
+            "type" : "boolean"
           }
         }
       },
@@ -189,19 +189,16 @@
       }
     },
     "methods" : {
-      "icreate.nus.edu.sg.ResponseEndpoint.insertResponse" : {
-        "request" : {
-          "$ref" : "Response"
-        },
+      "icreate.nus.edu.sg.ResponseEndpoint.getResponse" : {
         "response" : {
           "$ref" : "Response"
         }
       },
       "icreate.nus.edu.sg.ResponseEndpoint.removeResponse" : {
       },
-      "icreate.nus.edu.sg.ResponseEndpoint.getResponse" : {
+      "icreate.nus.edu.sg.ResponseEndpoint.listResponse" : {
         "response" : {
-          "$ref" : "Response"
+          "$ref" : "CollectionResponse_Response"
         }
       },
       "icreate.nus.edu.sg.ResponseEndpoint.updateResponse" : {
@@ -212,9 +209,12 @@
           "$ref" : "Response"
         }
       },
-      "icreate.nus.edu.sg.ResponseEndpoint.listResponse" : {
+      "icreate.nus.edu.sg.ResponseEndpoint.insertResponse" : {
+        "request" : {
+          "$ref" : "Response"
+        },
         "response" : {
-          "$ref" : "CollectionResponse_Response"
+          "$ref" : "Response"
         }
       }
     }
