@@ -1,9 +1,0 @@
-<p>Wait for a while then click get question set.</p>
-<button ng-click="getUser()">Get Question Sets</button><br>
-<span>NUS ID:{{user.nusId}}</span>
-<ul>
-  <li ng-repeat="questionset in user.qs">
-  <a href="#/listQn/{{questionset.keyString}}">{{questionset.name}}</a><button ng-click="removeQS({{$index}})">remove</button>
-
-</ul>
-<input ng-model="qsName"></input><button ng-click="addQS()">add</button>
