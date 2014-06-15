@@ -4,6 +4,33 @@ body {
   padding-bottom: 20px;
 }
 
+.loading-container {
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index: 1000;
+  background: black;
+}
+.loading-container-text {
+  position:absolute;
+  top:50%;
+  left:50%;
+  display:block;
+  width:100px;
+  height:100px;
+  line-height:100px;
+  margin:-50px 0 0 -50px;
+  color:#fff;
+  text-align:center;
+  background:rgba(0,0,0,.9);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  content: 'loading...';
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

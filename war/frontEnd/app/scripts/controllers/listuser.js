@@ -8,16 +8,26 @@
  * Controller of the icreateApp
  */
 angular.module('icreateApp')
-  .controller('ListuserCtrl', function ($scope, $window) {
+  .controller('ListuserCtrl', function ($scope, $window, $timeout) {
     $scope.users = [];
     $scope.nusId = "";
-    $scope.isReady = false;
+    $scope.isReady = true;
     $scope.isUserReady = false;
-    $window.init = function(){
-    	$scope.$apply($scope.init);
+    $scope.isLoad = false;
+
+    var countUp = function() {
+        $scope.timeInMs+= 500;
+        $timeout(countUp, 500);
     }
+
     $scope.init = function(){
-    	gapi.client.load('userendpoint', 'v1', $scope.finishLoading, root);
+
+        if(angular.isUndefined(gapi)){
+            $timeout($scope.init, 1000);
+        }
+        else{
+            gapi.client.load('userendpoint', 'v1', $scope.finishLoading, root);
+        }
     }
 
     $scope.finishLoading = function(){
@@ -26,6 +36,7 @@ angular.module('icreateApp')
     }
 
     $scope.listUser = function(){
+        $scope.isReady = false;
 		gapi.client.userendpoint.listUser().execute(function(resp) {
 			$scope.users = resp.items;
 			$scope.isUserReady = true;
@@ -56,5 +67,6 @@ angular.module('icreateApp')
 			console.log(resp);
 		});
     }   
+    //$scope.init();
 
   });
