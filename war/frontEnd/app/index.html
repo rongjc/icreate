@@ -14,8 +14,10 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+
   </head>
-  <body ng-app="icreateApp">
+  <!---<body ng-app="icreateApp">-->
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -77,6 +79,7 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/requirejs/require.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -89,16 +92,25 @@
         <script src="scripts/controllers/listuser.js"></script>
         <!-- endbuild -->
 
- <script type="text/javascript">
-       function loadLib() {
+    <script type="text/javascript">
+      var numLib = 4;
+      function loadLib() {
       //Parameters are APIName,APIVersion,CallBack function,API Root 
-       gapi.client.load('questionendpoint', 'v1', null, root);
-       gapi.client.load('questionsetendpoint', 'v1', null, root);
-        gapi.client.load('responseendpoint', 'v1', null, root);
-        gapi.client.load('userendpoint', 'v1', null, root);
-        
-      }</script>
-<script src="https://apis.google.com/js/client.js?onload=loadLib"></script>
+        gapi.client.load('questionendpoint', 'v1', libCallBack, root);
+        gapi.client.load('questionsetendpoint', 'v1', libCallBack, root);
+        gapi.client.load('responseendpoint', 'v1', libCallBack, root);
+        gapi.client.load('userendpoint', 'v1', libCallBack, root);
+      }
+      function libCallBack(){
+        numLib--;
+        console.log(numLib)
+        if(numLib == 0){
+          var $injector = angular.bootstrap(document, ['icreateApp']);
+        }
+      }
+      
+    </script>
 
+<script src="https://apis.google.com/js/client.js?onload=loadLib"></script>
 </body>
 </html>

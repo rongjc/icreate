@@ -14,16 +14,15 @@ angular.module('icreateApp')
     $scope.isReady = true;
     $scope.isUserReady = false;
     $scope.isLoad = false;
-
-    var countUp = function() {
-        $scope.timeInMs+= 500;
-        $timeout(countUp, 500);
+    $scope.countUp = function() {
+        $timeout(countUp, 1000);
+        console.log("countUp");
     }
 
     $scope.init = function(){
 
         if(angular.isUndefined(gapi)){
-            $timeout($scope.init, 1000);
+            $timeout($scope.countUp, 1000);
         }
         else{
             gapi.client.load('userendpoint', 'v1', $scope.finishLoading, root);
@@ -67,6 +66,7 @@ angular.module('icreateApp')
 			console.log(resp);
 		});
     }   
+    $scope.listUser();
     //$scope.init();
 
   });
